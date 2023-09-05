@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Visual Search Web Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn {
+            background-color: #f05454;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #e43f3f;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .query-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .result-figure {
+            text-align: center;
+            margin: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .result-figure:hover {
+            transform: scale(1.05);
+        }
+
+        .result-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .result-caption {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #343a40;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Visual Search Web Application</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="upload-btn-wrapper">
+                <button class="btn">Upload an Image</button>
+                <input type="file" name="query_img" />
+            </div>
+            <br>
+            <input type="submit" class="btn btn-primary" value="Search">
+        </form>
+        <h2>Query:</h2>
+        {% if query_path %}
+        <img src="{{ query_path }}" class="query-image">
+        {% endif %}
+        <div class="clearfix"></div>
+        <h2>Results:</h2>
+        <div class="row">
+            {% for score in scores %}
+            <div class="col-md-4">
+                <figure class="result-figure">
+                    <img src="{{ score[1] }}" class="result-image">
+                    <figcaption class="result-caption">{{ score[0] }}</figcaption>
+                </figure>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
