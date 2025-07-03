@@ -1,4 +1,4 @@
-# Visual-Search-Application
+# RAKATHON'23 Visual-Search-Application
 
 ## Objective:
 
